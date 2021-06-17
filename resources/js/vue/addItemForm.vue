@@ -1,6 +1,6 @@
 <template>
     <div class="add-item">
-        <input type="text" v-model="item.name" placeholder="What do you have to do?"/>
+        <input type="text" v-model="item.name" placeholder="What do you have to do?" />
         <font-awesome-icon
             icon="plus-square"
             @click="addItem()"

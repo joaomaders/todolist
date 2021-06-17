@@ -32,15 +32,19 @@
                 });
             },
             removeItem () {
-                axios.delete( 'api/item/' + this.item.id )
-                .then( response => {
-                    if (response.status == 200) {
-                        this.$emit('itemchanged');
-                    }
-                })
-                .catch( error => {
-                    console.log( error );
-                });
+                let confirmation = confirm("Do you really want to remove " + "'" + this.item.name + "' ?");
+
+                if ( confirmation ) {
+                    axios.delete( 'api/item/' + this.item.id )
+                    .then( response => {
+                        if (response.status == 200) {
+                            this.$emit('itemchanged');
+                        }
+                    })
+                    .catch( error => {
+                        console.log( error );
+                    });
+                }
             }
         }
     }

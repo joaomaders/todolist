@@ -103,4 +103,10 @@ class ItemController extends Controller
 
         return "Item not found";
     }
+
+
+    public function count()
+    {
+        return Item::count();
+    }
 }

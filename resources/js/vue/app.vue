@@ -17,6 +17,11 @@
             v-on:reloadlist="getList()"
         />
 
+        <div class="count" v-if="count > 0">Come on, you still have <b>{{ count }}</b> tasks to do!</div>
+        <div class="count" v-else >
+            Congratulations, you're done!
+            <font-awesome-icon icon="check-circle" class="icon"/>
+        </div>
     </div>
 </template>
 
@@ -31,22 +36,35 @@
         },
         data: function () {
             return {
-                items: []
+                items: [],
+                count: 0
             }
         },
         methods: {
             getList () {
                 axios.get('api/items')
                 .then( response => {
-                    this.items = response.data
+                    this.items = response.data;
+                    this.getUnfinished();
                 })
                 .catch( error => {
                     console.log( error );
                 });
+            },
+            getUnfinished () {
+                let count = 0;
+
+                this.items.forEach((item) => {
+                    if (item.completed != 1) {
+                        count++;
+                    }
+                });
+
+                this.count = count;
             }
         },
         created () {
-            this.getList();
+            this.getList()
         }
     }
 </script>
@@ -83,6 +101,18 @@
                     cursor: pointer;
                     color: $green;
                 }
+            }
+        }
+        .count {
+            color: white;
+            text-align: center;
+            margin-top: 35px;
+            b {
+                color: red;
+            }
+            .icon {
+                margin-left: 5px;
+                color: $green;
             }
         }
     }
