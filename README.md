@@ -35,7 +35,7 @@ The project itself is really simple, but teached me a lot.
 
 ## Vue Setup
 
-###Install npm
+### Install npm
 ```bash
     npm install
 ```
